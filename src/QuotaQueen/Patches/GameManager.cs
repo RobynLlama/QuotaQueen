@@ -23,6 +23,7 @@ public static class GameManagerPatches
       __instance.deathPenaltyFlat = cfg.DeathPenaltyFlat.Value;
       __instance.deathPenaltyPercent = cfg.DeathPenaltyPCT.Value;
     }
+    //Pretty sure this never runs because OnStartServer is ONLY called on hosts
     else
       QuotaQueenPlugin.Log.LogWarning("OnStartServer as client, shutting down for this round");
   }
