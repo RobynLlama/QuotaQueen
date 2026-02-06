@@ -2,8 +2,7 @@
 
 Quota Queen for YAPYAP is a mod designed to allow the game host to modify various aspects of the game's difficulty and progression.
 
-!!Warning!!
-Not yet tested in multiplayer.
+Note: Only the host needs to run the mod, the host controls all the quota and dungeon related variables. Quota Queen will shutdown automatically when run in client mode to avoid desyncing from the host.
 
 ## Tweakables
 
