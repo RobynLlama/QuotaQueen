@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
@@ -34,6 +35,6 @@ public partial class QuotaQueenPlugin : BaseUnityPlugin
     Harmony patcher = new(Id);
     patcher.PatchAll(typeof(GameManagerPatches));
 
-    Log.LogMessage($"Patches applied");
+    Log.LogMessage($"Applied {patcher.GetPatchedMethods().Count()} patches");
   }
 }
