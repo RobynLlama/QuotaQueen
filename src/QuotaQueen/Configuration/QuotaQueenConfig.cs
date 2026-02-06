@@ -2,6 +2,7 @@ using System.IO;
 using System.Text;
 using BepInEx;
 using BepInEx.Configuration;
+using QuotaQueen.QuotaStrategies;
 
 namespace QuotaQueen.Configuration;
 
@@ -12,6 +13,7 @@ internal class QuotaQueenConfig
   internal ConfigEntry<int> RoundDuration;
   internal ConfigEntry<int> QuotaDays;
   internal ConfigEntry<int> GoldReward;
+  internal ConfigEntry<string> QuotaStrategy;
 
   internal ConfigEntry<bool> UsePCTPenalty;
   internal ConfigEntry<int> DeathPenaltyFlat;
@@ -24,6 +26,9 @@ internal class QuotaQueenConfig
 
     QuotaDays = cfg.Bind("Quota Settings", "QuotaDays", 3, "The number of days per quota");
     GoldReward = cfg.Bind("Quota Settings", "GoldReward", 25, "How much gold is given for completing a quota.\nNote: More gold is rewarded for exceeding the quota, this is the minimum for meeting any quota");
+
+    QuotaStrategy = cfg.Bind("Quota Settings", "Quota Strategy", QuotaStrategyManager.DefaultStrategyGUID, new ConfigDescription("This controls the way the game generates each new quota", new AcceptableValueList<string>(QuotaStrategyManager.StrategyKeys)));
+    QuotaStrategyManager.Lock();
 
     UsePCTPenalty = cfg.Bind("Death Settings", "UsePCTPenalty", true, "If this flag is disabled then the flat death penalty will be subbed in for the default percentage based penalty");
     DeathPenaltyFlat = cfg.Bind("Death Settings", "DeathPenaltyFlat", 100, "If the death penalty is set to flat mode this much score will be removed per dead player at the end of the round");
@@ -45,6 +50,7 @@ internal class QuotaQueenConfig
     sb.AppendLine($"--Quota Configs--");
     sb.AppendLine($"  Quota Days:        {QuotaDays.Value}");
     sb.AppendLine($"  Quota Reward:      {GoldReward.Value}");
+    sb.AppendLine($"  Quota Strategy:    {QuotaStrategy.Value}");
     sb.AppendLine($"--Death Configs--");
     sb.AppendLine($"  Using PCT Penalty: {UsePCTPenalty.Value}");
     sb.AppendLine($"  Percent Penalty:   {DeathPenaltyPCT.Value:P1}");
