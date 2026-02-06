@@ -6,22 +6,25 @@ using HarmonyLib;
 using QuotaQueen.Configuration;
 using QuotaQueen.Patches;
 using QuotaQueen.QuotaStrategies;
+using UnityEngine.SceneManagement;
 
 namespace QuotaQueen;
 
 [BepInAutoPlugin]
 public partial class QuotaQueenPlugin : BaseUnityPlugin
 {
-  internal static QuotaQueenPlugin Instance = null!;
   internal static ManualLogSource Log { get; private set; } = null!;
   internal static QuotaQueenConfig QueenConfig { get; private set; } = null!;
+
+  private bool MainMenuSeen = false;
 
   private void Awake()
   {
     Log = Logger;
-    Instance = this;
 
     Log.LogInfo($"Quota Queen startup");
+
+    SceneManager.sceneLoaded += OnSceneChange;
 
     Harmony patcher = new(Id);
     patcher.PatchAll(typeof(GameManagerPatches));
@@ -29,6 +32,18 @@ public partial class QuotaQueenPlugin : BaseUnityPlugin
     Log.LogMessage($"Applied {patcher.GetPatchedMethods().Count()} patches");
 
     QuotaStrategyManager.RegisterStrategy("QuotaQueen", "VeryEasy", new(QuotaStrategyEasy.GetEasyQuota));
+  }
+
+  private void OnSceneChange(Scene arg0, LoadSceneMode arg1)
+  {
+    if (MainMenuSeen)
+      return;
+
+    if (arg0.name.Equals("menu", StringComparison.OrdinalIgnoreCase))
+    {
+      FreshenConfig();
+      MainMenuSeen = true;
+    }
   }
 
   internal void FreshenConfig()

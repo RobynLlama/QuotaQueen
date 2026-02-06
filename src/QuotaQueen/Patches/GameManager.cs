@@ -11,8 +11,6 @@ internal static class GameManagerPatches
   [HarmonyPostfix]
   static void GameStartPatch(GameManager __instance)
   {
-    QuotaQueenPlugin.Instance.FreshenConfig();
-
     if (__instance.isServer)
     {
       var cfg = QuotaQueenPlugin.QueenConfig;
