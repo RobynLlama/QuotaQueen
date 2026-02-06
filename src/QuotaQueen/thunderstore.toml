@@ -1,0 +1,44 @@
+[config]
+  schemaVersion="0.0.1"
+
+[general]
+  repository="https://thunderstore.io"
+
+[package]
+  containsNsfwContent=false
+  description        ="[Host Required] exposes values for tweaking the quota and game progression. Designed for solo or small group play"
+  name               ="QuotaQueen"
+  namespace          ="Robyn"
+  websiteUrl         ="https://github.com/RobynLlama/QuotaQueen"
+
+  [package.dependencies]
+    BepInEx-BepInExPack="5.4.2304"
+
+[build]
+  icon  ="../../icon.png"
+  outdir="../../artifacts/thunderstore/"
+  readme="../../README.md"
+
+  [[build.copy]]
+    source="../../artifacts/bin/QuotaQueen/release/dev.mamallama.quotaqueen.dll"
+    target="plugins/"
+
+  [[build.copy]]
+    source="../../CHANGELOG.md"
+    target="/"
+
+  [[build.copy]]
+    source="../../LICENSE"
+    target="/"
+
+    # The following config options only apply when using TCLI to publish to Thunderstore directly:
+
+[publish]
+  # See communities at:
+  # https://thunderstore.io/api/experimental/community/
+  communities=["yapyap"]
+
+  [publish.categories]
+    # See categories at:
+    # https://thunderstore.io/api/experimental/community/yapyap/category/
+    yapyap=["mods"]
