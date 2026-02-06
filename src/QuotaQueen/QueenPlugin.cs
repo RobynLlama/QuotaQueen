@@ -12,6 +12,7 @@ namespace QuotaQueen;
 [BepInAutoPlugin]
 public partial class QuotaQueenPlugin : BaseUnityPlugin
 {
+  internal static QuotaQueenPlugin Instance = null!;
   internal static ManualLogSource Log { get; private set; } = null!;
   internal static QuotaQueenConfig QueenConfig { get; private set; } = null!;
 
