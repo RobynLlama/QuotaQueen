@@ -8,7 +8,14 @@ namespace QuotaQueen.QuotaStrategies;
 /// </summary>
 public static class QuotaStrategyManager
 {
+  /// <summary>
+  /// The GUID for the default game behavior
+  /// </summary>
   public const string DefaultStrategyGUID = "YAPYAP.Default";
+
+  /// <summary>
+  /// A listing of all strategy GUIDs including the default
+  /// </summary>
   public static string[] StrategyKeys => [DefaultStrategyGUID, .. _quotaStrategies.Keys];
   private static readonly Dictionary<string, QuotaStrategy> _quotaStrategies = [];
 

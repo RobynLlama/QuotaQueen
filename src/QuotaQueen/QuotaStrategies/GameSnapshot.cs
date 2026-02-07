@@ -8,6 +8,8 @@ namespace QuotaQueen.QuotaStrategies;
 /// </summary>
 /// <param name="instance">The GameManager instance</param>
 /// <param name="quotaEnded">If the current quota has ended</param>
+/// <param name="specific">If this is a specific request</param>
+/// <param name="which">If specific, which session do we calculate</param>
 public readonly struct GameSnapshot(GameManager instance, bool quotaEnded = false, bool specific = false, int which = 0)
 {
   /// <summary>

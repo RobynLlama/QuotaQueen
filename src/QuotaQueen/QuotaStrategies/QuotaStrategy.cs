@@ -5,8 +5,10 @@ namespace QuotaQueen.QuotaStrategies;
 /// with the strategy manager
 /// </summary>
 /// <param name="strategy">A reference to the method to call for this strategy</param>
-/// <param name="configs">(Optional) A list of config definitions to be managed by Quota Queen</param>
 public class QuotaStrategy(UpdateQuotaDelegate strategy)
 {
+  /// <summary>
+  /// The delegate for running the strategy
+  /// </summary>
   public readonly UpdateQuotaDelegate ExecuteStrategy = strategy;
 }

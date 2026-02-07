@@ -10,6 +10,9 @@ using UnityEngine.SceneManagement;
 
 namespace QuotaQueen;
 
+/// <summary>
+/// Plugin
+/// </summary>
 [BepInAutoPlugin]
 public partial class QuotaQueenPlugin : BaseUnityPlugin
 {
