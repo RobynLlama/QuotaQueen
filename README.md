@@ -20,6 +20,7 @@ The following properties can be adjusted in the mod's configuration file. All of
 | --- | --- | --- |
 | **QuotaDays** | `3` | The number of days allowed to meet each quota. |
 | **GoldReward** | `25` | The base gold reward for meeting a quota. Additional gold is awarded for exceeding the target. |
+| **Quota Strategy** | `YAPYAP.Default` | Defines which Quota Strategy is used to set the quota. Ships with `YAPYAP.Default`, `QuotaQueen.VeryEasy` and `QuotaQueen.ConfigurableQuota`. Note: Other mods can provide additional strategies that will appear in the acceptable values list (or dropdown if using Gale Mod manager) |
 
 ### Death Settings
 
