@@ -27,7 +27,7 @@ internal class QuotaQueenConfig
     QuotaDays = cfg.Bind("Quota Settings", "QuotaDays", 3, "The number of days per quota");
     GoldReward = cfg.Bind("Quota Settings", "GoldReward", 25, "How much gold is given for completing a quota.\nNote: More gold is rewarded for exceeding the quota, this is the minimum for meeting any quota");
 
-    QuotaStrategy = cfg.Bind("Quota Settings", "Quota Strategy", QuotaStrategyManager.DefaultStrategyGUID, new ConfigDescription("This controls the way the game generates each new quota", new AcceptableValueList<string>(QuotaStrategyManager.StrategyKeys)));
+    QuotaStrategy = cfg.Bind("Quota Settings", "QuotaStrategy", QuotaStrategyManager.DefaultStrategyGUID, new ConfigDescription("This controls the way the game generates each new quota", new AcceptableValueList<string>(QuotaStrategyManager.StrategyKeys)));
     QuotaStrategyManager.Lock();
 
     UsePCTPenalty = cfg.Bind("Death Settings", "UsePCTPenalty", true, "If this flag is disabled then the flat death penalty will be subbed in for the default percentage based penalty");
