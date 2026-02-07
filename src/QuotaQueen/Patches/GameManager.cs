@@ -62,7 +62,7 @@ internal static class GameManagerPatches
     if (strategy == QuotaStrategyManager.DefaultStrategyGUID)
       return;
 
-    if (QuotaStrategyManager.TryExecuteStrategy(strategy, new(__instance), out var value))
+    if (QuotaStrategyManager.TryExecuteStrategy(strategy, new(__instance, false, true, sessionIndex), out var value))
       __result = value;
     else
     {
