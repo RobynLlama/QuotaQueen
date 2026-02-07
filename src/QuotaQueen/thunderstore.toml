@@ -24,6 +24,10 @@
     target="plugins/"
 
   [[build.copy]]
+    source="../../artifacts/bin/QuotaQueen/release/dev.mamallama.quotaqueen.xml"
+    target="plugins/"
+
+  [[build.copy]]
     source="../../CHANGELOG.md"
     target="/"
 
