@@ -42,7 +42,20 @@ public readonly struct GameSnapshot(GameManager instance, bool quotaEnded = fals
   /// <summary>
   /// Returns the effective quota count. This includes the current
   /// completed quota if the game is in the judgement scene and has
-  /// just completed a quota.
+  /// <summary>
+  /// Returns a very lovely formatted string with all members showing
   /// </summary>
-  public int EffectiveQuotaCount => QuotaJustEnded ? QuotasCompleted + 1 : QuotasCompleted;
+  /// <returns></returns>
+  public override string ToString()
+  {
+    StringBuilder sb = new("GameState:\n");
+    sb.AppendLine($"  Just Ended:         {QuotaJustEnded}");
+    sb.AppendLine($"  Completed:          {QuotasCompleted}");
+    sb.AppendLine($"  Players:            {PlayersInSession}");
+    sb.AppendLine($"  Current Goal:       {CurrentQuotaGoal}");
+    sb.AppendLine($"  Multiplier:         {QuotaMultiplier}");
+    sb.AppendLine($"  Effective Quotas:   {EffectiveQuotaCount}");
+
+    return sb.ToString();
+  }
 }
