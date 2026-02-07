@@ -20,7 +20,7 @@ The following properties can be adjusted in the mod's configuration file. All of
 | --- | --- | --- |
 | **QuotaDays** | `3` | The number of days allowed to meet each quota. |
 | **GoldReward** | `25` | The base gold reward for meeting a quota. Additional gold is awarded for exceeding the target. |
-| **Quota Strategy** | `YAPYAP.Default` | Defines which Quota Strategy is used to set the quota. Ships with `YAPYAP.Default`, `QuotaQueen.VeryEasy` and `QuotaQueen.ConfigurableQuota`. Note: Other mods can provide additional strategies that will appear in the acceptable values list (or dropdown if using Gale Mod manager) |
+| **QuotaStrategy** | `YAPYAP.Default` | Defines which Quota Strategy is used to set the quota. Ships with `YAPYAP.Default`, `QuotaQueen.VeryEasy` and `QuotaQueen.ConfigurableQuota`. Note: Other mods can provide additional strategies that will appear in the acceptable values list (or dropdown if using Gale Mod manager) |
 
 ### Death Settings
 
@@ -29,6 +29,15 @@ The following properties can be adjusted in the mod's configuration file. All of
 | **UsePCTPenalty** | `true` | If enabled, the game uses a percentage-based penalty. If disabled, it uses a flat value penalty. |
 | **DeathPenaltyFlat** | `100` | The amount of score removed per dead player when using flat penalty mode. |
 | **DeathPenaltyPCT** | `0.1` (10%) | The percentage of total score removed per dead player when using percentage penalty mode. |
+
+### Configurable Quota
+
+After the game has run at least once a second config file called `QuotaQueen.ConfigurableQuota.cfg` will be generated. If you set the Quota Strategy to `QuotaQueen.ConfigurableQuota` this file will be used to determine the next quota.
+
+| Property | Default | Description |
+| --- | --- | --- |
+| **BaseQuota** | `900` | The starting quota on day 0 for each run |
+| **QuotaGrowth** | `900` | The amount of quota added to the base for each completed quota |
 
 ## Credits
 
