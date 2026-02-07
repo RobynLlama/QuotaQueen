@@ -1,3 +1,4 @@
+using System.Text;
 using YAPYAP;
 
 namespace QuotaQueen.QuotaStrategies;
@@ -7,7 +8,7 @@ namespace QuotaQueen.QuotaStrategies;
 /// </summary>
 /// <param name="instance">The GameManager instance</param>
 /// <param name="quotaEnded">If the current quota has ended</param>
-public readonly struct GameSnapshot(GameManager instance, bool quotaEnded = false)
+public readonly struct GameSnapshot(GameManager instance, bool quotaEnded = false, bool specific = false, int which = 0)
 {
   /// <summary>
   /// Has the current quota ended. If true, this quota request
@@ -15,6 +16,19 @@ public readonly struct GameSnapshot(GameManager instance, bool quotaEnded = fals
   /// Wizard
   /// </summary>
   public readonly bool QuotaJustEnded = quotaEnded;
+
+  /// <summary>
+  /// This flag is set if the request for a quota calculation is
+  /// coming from GetQuotaForSession which specifies a quota and
+  /// should be used instead
+  /// </summary>
+  public readonly bool RequestedSpecificQuota = specific;
+
+  /// <summary>
+  /// The quota requested by GetQuotaForSession when RequestedSpecificQuota
+  /// is set
+  /// </summary>
+  public readonly int RequestedQuotaNo = which;
 
   /// <summary>
   /// The total quotas completed, excluding the current quota if
@@ -42,6 +56,23 @@ public readonly struct GameSnapshot(GameManager instance, bool quotaEnded = fals
   /// <summary>
   /// Returns the effective quota count. This includes the current
   /// completed quota if the game is in the judgement scene and has
+  /// just completed a quota. This returns the specific quota instead
+  /// if GetQuotaForSession is being called
+  /// </summary>
+  public int EffectiveQuotaCount
+  {
+    get
+    {
+      //Return specific if requested
+      if (RequestedSpecificQuota)
+        return RequestedQuotaNo;
+
+      //Return the bare amount or amount + 1 if we're in the judgement
+      //context and just completed a quota
+      return QuotaJustEnded ? QuotasCompleted + 1 : QuotasCompleted;
+    }
+  }
+
   /// <summary>
   /// Returns a very lovely formatted string with all members showing
   /// </summary>
