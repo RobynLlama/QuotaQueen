@@ -32,7 +32,7 @@ public partial class QuotaQueenPlugin : BaseUnityPlugin
     Log.LogMessage($"Applied {patcher.GetPatchedMethods().Count()} patches");
 
     QuotaStrategyManager.RegisterStrategy("QuotaQueen", "VeryEasy", new(QuotaStrategyEasy.GetEasyQuota));
-    QuotaStrategyManager.RegisterStrategy("QuotaQueen", "ConfigurableQuota", new(QuotaStrategyConfigurable.GetQuota, QuotaStrategyConfigurable.configs));
+    QuotaStrategyManager.RegisterStrategy("QuotaQueen", "ConfigurableQuota", new(QuotaStrategyConfigurable.GetQuota));
   }
 
   private void OnSceneChange(Scene arg0, LoadSceneMode arg1)
