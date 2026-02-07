@@ -33,6 +33,8 @@ public partial class QuotaQueenPlugin : BaseUnityPlugin
 
     QuotaStrategyManager.RegisterStrategy("QuotaQueen", "VeryEasy", new(QuotaStrategyEasy.GetEasyQuota));
     QuotaStrategyManager.RegisterStrategy("QuotaQueen", "ConfigurableQuota", new(QuotaStrategyConfigurable.GetQuota));
+
+    QuotaStrategyConfigurable.EarlyBind();
   }
 
   private void OnSceneChange(Scene arg0, LoadSceneMode arg1)
