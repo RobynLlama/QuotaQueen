@@ -21,8 +21,6 @@ internal static class QuotaStrategyConfigurable
   static readonly ConfigEntry<int> BaseQuota;
   static readonly ConfigEntry<int> QuotaGrowth;
 
-  internal static int GetQuota(GameSnapshot gameState)
-  {
-    return BaseQuota.Value + (QuotaGrowth.Value * gameState.EffectiveQuotaCount);
-  }
+  internal static int GetQuota(GameSnapshot gameState) =>
+    BaseQuota.Value + (QuotaGrowth.Value * gameState.EffectiveQuotaCount);
 }
