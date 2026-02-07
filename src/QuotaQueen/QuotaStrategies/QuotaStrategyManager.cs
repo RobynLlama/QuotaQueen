@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.IO;
+using BepInEx;
+using BepInEx.Configuration;
 
 namespace QuotaQueen.QuotaStrategies;
 
@@ -13,6 +16,7 @@ public static class QuotaStrategyManager
   private static readonly Dictionary<string, QuotaStrategy> _quotaStrategies = [];
 
   internal static void Lock() => Locked = true;
+  internal static BepInPlugin MetaInf = null!;
   private static bool Locked = false;
 
   /// <summary>
@@ -36,7 +40,21 @@ public static class QuotaStrategyManager
     if (_quotaStrategies.ContainsKey(namespacedID))
       QuotaQueenPlugin.Log.LogWarning($"{namespacedID} already exists in strategy dictionary, overwriting");
 
+    //insert strategy into table
     _quotaStrategies[namespacedID] = strategy;
+
+    //set up configs
+    if (strategy.Configs is not null)
+    {
+      ConfigFile file = new(Path.Combine(Paths.ConfigPath, namespacedID + ".cfg"), true, MetaInf);
+      foreach (var config in strategy.Configs)
+        config.BindToConfig(file);
+
+      strategy.ConfigFile = file;
+
+      //If an in-game config menu ever appears this is where we
+      //would register our 'bonus' configs
+    }
   }
 
   internal static bool TryExecuteStrategy(string which, GameSnapshot context, out int nextQuota)
