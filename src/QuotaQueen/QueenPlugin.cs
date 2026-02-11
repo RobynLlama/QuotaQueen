@@ -34,8 +34,8 @@ public partial class QuotaQueenPlugin : BaseUnityPlugin
 
     Log.LogMessage($"Applied {patcher.GetPatchedMethods().Count()} patches");
 
-    QuotaStrategyManager.RegisterStrategy("QuotaQueen", "VeryEasy", new(QuotaStrategyEasy.GetEasyQuota));
-    QuotaStrategyManager.RegisterStrategy("QuotaQueen", "ConfigurableQuota", new(QuotaStrategyConfigurable.GetQuota));
+    QuotaStrategyManager.RegisterStrategy("QuotaQueen", "VeryEasy", QuotaStrategyEasy.GetEasyQuota);
+    QuotaStrategyManager.RegisterStrategy("QuotaQueen", "ConfigurableQuota", QuotaStrategyConfigurable.GetQuota);
 
     QuotaStrategyConfigurable.EarlyBind();
   }

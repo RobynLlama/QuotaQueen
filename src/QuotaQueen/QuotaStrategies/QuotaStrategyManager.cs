@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace QuotaQueen.QuotaStrategies;
@@ -17,7 +18,7 @@ public static class QuotaStrategyManager
   /// A listing of all strategy GUIDs including the default
   /// </summary>
   public static string[] StrategyKeys => [DefaultStrategyGUID, .. _quotaStrategies.Keys];
-  private static readonly Dictionary<string, QuotaStrategy> _quotaStrategies = [];
+  private static readonly Dictionary<string, Func<GameSnapshot, int>> _quotaStrategies = [];
 
   internal static void Lock() => Locked = true;
   private static bool Locked = false;
@@ -30,7 +31,7 @@ public static class QuotaStrategyManager
   /// <param name="ownerGUID">A unique identifier for the source of this strategy</param>
   /// <param name="strategyName">An identifier for this specific strategy</param>
   /// <param name="strategy">The strategy to register</param>
-  public static void RegisterStrategy(string ownerGUID, string strategyName, QuotaStrategy strategy)
+  public static void RegisterStrategy(string ownerGUID, string strategyName, Func<GameSnapshot, int> strategy)
   {
     var namespacedID = $"{ownerGUID}.{strategyName}";
 
@@ -53,7 +54,7 @@ public static class QuotaStrategyManager
     if (!_quotaStrategies.TryGetValue(which, out var strategy))
       return false;
 
-    nextQuota = strategy.ExecuteStrategy(context);
+    nextQuota = strategy(context);
     return true;
   }
 }
